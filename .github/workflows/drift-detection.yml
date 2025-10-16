@@ -1,0 +1,71 @@
+# .github/workflows/drift-detection.yml
+# Detects configuration drift in deployed infrastructure
+
+name: Drift Detection
+
+on:
+  schedule:
+    - cron: '0 9 * * 1-5'  # Weekdays at 9 AM UTC
+  workflow_dispatch:
+
+jobs:
+  drift-detection:
+    name: Check for Drift
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.0
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Terraform Init
+        run: |
+          cd examples/simple-web-app
+          terraform init
+
+      - name: Terraform Plan
+        id: plan
+        run: |
+          cd examples/simple-web-app
+          terraform plan -detailed-exitcode -no-color
+        continue-on-error: true
+
+      - name: Create Issue if Drift Detected
+        if: steps.plan.outputs.exitcode == 2
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🚨 Infrastructure Drift Detected',
+              body: `## Drift Detection Alert
+              
+              Configuration drift has been detected in the infrastructure.
+              
+              **Environment:** Production
+              **Detection Time:** ${new Date().toISOString()}
+              
+              Please review the changes and apply corrective actions if necessary.
+              
+              ### Next Steps
+              1. Review the Terraform plan
+              2. Determine if changes are expected
+              3. Either apply the plan or update the code
+              4. Document any manual changes
+              
+              [View Workflow Run](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})
+              `,
+              labels: ['drift-detection', 'infrastructure']
+            })
