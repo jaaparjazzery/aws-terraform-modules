@@ -1,0 +1,26 @@
+# .gitattributes
+# Git attributes for better diff and merge handling
+
+# Terraform files
+*.tf diff=terraform
+*.tfvars diff=terraform
+*.tfstate merge=ours
+*.tfstate.backup merge=ours
+
+# Documents
+*.md text
+*.txt text
+
+# Scripts
+*.sh text eol=lf
+*.bash text eol=lf
+
+# YAML
+*.yml text
+*.yaml text
+
+# JSON
+*.json text
+
+# Ensure line endings are consistent
+* text=auto
