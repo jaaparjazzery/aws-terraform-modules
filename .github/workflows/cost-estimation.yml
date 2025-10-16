@@ -1,0 +1,55 @@
+# .github/workflows/cost-estimation.yml
+# Estimates infrastructure costs using Infracost
+
+name: Cost Estimation
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'examples/**/*.tf'
+      - 'modules/**/*.tf'
+
+jobs:
+  infracost:
+    name: Infracost Estimation
+    runs-on: ubuntu-latest
+    
+    env:
+      INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
+    
+    steps:
+      - name: Checkout base branch
+        uses: actions/checkout@v4
+        with:
+          ref: '${{ github.event.pull_request.base.ref }}'
+
+      - name: Generate base cost estimate
+        uses: infracost/actions/setup@v2
+        with:
+          api-key: ${{ secrets.INFRACOST_API_KEY }}
+
+      - name: Generate Infracost baseline
+        run: |
+          infracost breakdown --path=examples/ \
+            --format=json \
+            --out-file=/tmp/infracost-base.json
+
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+
+      - name: Generate PR cost estimate
+        run: |
+          infracost breakdown --path=examples/ \
+            --format=json \
+            --out-file=/tmp/infracost.json
+
+      - name: Post Infracost comment
+        run: |
+          infracost comment github --path=/tmp/infracost.json \
+            --repo=$GITHUB_REPOSITORY \
+            --github-token=${{ secrets.GITHUB_TOKEN }} \
+            --pull-request=${{ github.event.pull_request.number }} \
+            --behavior=update
+
+---
