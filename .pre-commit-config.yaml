@@ -138,5 +138,3 @@ repos:
       - id: pretty-format-yaml
         name: Format YAML Files
         args: [--autofix, --indent, '2']
-
----
