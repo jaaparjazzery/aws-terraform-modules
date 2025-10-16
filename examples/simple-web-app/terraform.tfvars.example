@@ -1,0 +1,10 @@
+aws_region   = "us-east-1"
+project_name = "my-web-app"
+environment  = "dev"
+
+db_username = "dbadmin"
+db_password = "ChangeMe123!"  # CHANGE THIS!
+
+web_server_count  = 2
+web_instance_type = "t3.small"
+db_instance_class = "db.t3.micro"
