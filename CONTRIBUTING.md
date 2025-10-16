@@ -266,7 +266,7 @@ cd test
 go test -v -timeout 30m
 ```
 
-## 📚 Documentation Guidelines
+##  Documentation Guidelines
 
 ### Module README Structure
 
@@ -346,7 +346,7 @@ Use terraform-docs to auto-generate sections:
 terraform-docs markdown table --output-file README.md modules/your-module
 ```
 
-## 💬 Commit Message Convention
+##  Commit Message Convention
 
 We follow [Conventional Commits](https://www.conventionalcommits.org/):
 
