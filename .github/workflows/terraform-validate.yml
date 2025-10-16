@@ -1,3 +1,6 @@
+# .github/workflows/terraform-validate.yml
+# Validates all Terraform configurations on push and PR
+
 name: Terraform Validation
 
 on:
@@ -75,3 +78,4 @@ jobs:
             })
 
 ---
+
