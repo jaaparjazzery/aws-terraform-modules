@@ -26,7 +26,7 @@ We take security vulnerabilities seriously. If you discover a security issue, pl
 
 ### 📧 Email Disclosure (Alternative)
 
-If you prefer email, send details to: security@example.com
+If you prefer email, send details to: security@quidgee.com
 
 **Include:**
 - Subject: "[SECURITY] Description"
@@ -147,7 +147,7 @@ We recognize security researchers who responsibly disclose vulnerabilities:
 
 ## Contact
 
-- **Security Issues:** security@example.com
+- **Security Issues:** security@quidgee.com
 - **General Questions:** GitHub Discussions
 - **Documentation:** See [README.md](../README.md)
 
@@ -209,7 +209,7 @@ an individual is officially representing the community in public spaces.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at
-conduct@example.com.
+conduct@quidgee.com.
 
 All complaints will be reviewed and investigated promptly and fairly.
 
