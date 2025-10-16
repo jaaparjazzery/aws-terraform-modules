@@ -381,7 +381,7 @@ locals {
 }
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 aws-terraform-modules/
@@ -566,3 +566,4 @@ If you find this project useful, please consider giving it a star!
 ---
 
 For questions or feedback, please open an issue or start a discussion.
+
