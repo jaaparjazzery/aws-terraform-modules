@@ -1,0 +1,142 @@
+# .pre-commit-config.yaml
+# Pre-commit hooks for Terraform code quality and security
+# Installation: pip install pre-commit && pre-commit install
+
+repos:
+  # Terraform hooks
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.83.5
+    hooks:
+      # Format Terraform files
+      - id: terraform_fmt
+        name: Terraform Format
+        description: Rewrites all Terraform files to canonical format
+        
+      # Validate Terraform files
+      - id: terraform_validate
+        name: Terraform Validate
+        description: Validates all Terraform files
+        args:
+          - --hook-config=--retry-once-with-cleanup=true
+        
+      # Generate documentation
+      - id: terraform_docs
+        name: Terraform Docs
+        description: Inserts input and output documentation into README.md
+        args:
+          - --hook-config=--path-to-file=README.md
+          - --hook-config=--add-to-existing-file=true
+          - --hook-config=--create-file-if-not-exist=true
+          
+      # Security scanning with tfsec
+      - id: terraform_tfsec
+        name: Terraform Security Scan (tfsec)
+        description: Scans Terraform for security issues
+        args:
+          - --args=--minimum-severity=MEDIUM
+          
+      # Linting with TFLint
+      - id: terraform_tflint
+        name: Terraform Lint
+        description: Validates Terraform files with TFLint
+        args:
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+          
+      # Check for terraform provider versions
+      - id: terraform_providers_lock
+        name: Lock Terraform Providers
+        description: Updates provider locks
+        args:
+          - --hook-config=--mode=always-regenerate-lockfile
+          
+      # Validate terragrunt files
+      - id: terragrunt_validate
+        name: Terragrunt Validate
+        description: Validates all Terragrunt files
+        
+  # Security scanning with Checkov
+  - repo: https://github.com/bridgecrewio/checkov
+    rev: 3.1.0
+    hooks:
+      - id: checkov
+        name: Checkov Security Scan
+        description: Scans cloud infrastructure for misconfigurations
+        args:
+          - --quiet
+          - --framework=terraform
+          
+  # General file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # Prevent large files from being committed
+      - id: check-added-large-files
+        name: Check for Large Files
+        args: ['--maxkb=1000']
+        
+      # Ensure files end with newline
+      - id: end-of-file-fixer
+        name: Fix End of Files
+        exclude: \.tfvars$
+        
+      # Remove trailing whitespace
+      - id: trailing-whitespace
+        name: Trim Trailing Whitespace
+        args: [--markdown-linebreak-ext=md]
+        
+      # Check for merge conflicts
+      - id: check-merge-conflict
+        name: Check for Merge Conflicts
+        
+      # Validate YAML files
+      - id: check-yaml
+        name: Check YAML Syntax
+        args: ['--allow-multiple-documents']
+        
+      # Validate JSON files
+      - id: check-json
+        name: Check JSON Syntax
+        
+      # Check for files that would conflict on case-insensitive filesystems
+      - id: check-case-conflict
+        name: Check Filename Case Conflicts
+        
+      # Prevent committing directly to main/master
+      - id: no-commit-to-branch
+        name: Prevent Direct Commits to Main
+        args: ['--branch=main', '--branch=master']
+        
+      # Check for AWS credentials
+      - id: detect-aws-credentials
+        name: Detect AWS Credentials
+        args: ['--allow-missing-credentials']
+        
+      # Check for private keys
+      - id: detect-private-key
+        name: Detect Private Keys
+        
+  # Markdown linting
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.38.0
+    hooks:
+      - id: markdownlint
+        name: Lint Markdown Files
+        args: ['--fix']
+        
+  # Commit message linting
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.0.0
+    hooks:
+      - id: conventional-pre-commit
+        name: Conventional Commits
+        stages: [commit-msg]
+        
+  # YAML formatting
+  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+    rev: v2.11.0
+    hooks:
+      - id: pretty-format-yaml
+        name: Format YAML Files
+        args: [--autofix, --indent, '2']
+
+---
