@@ -1,0 +1,59 @@
+# .github/workflows/terraform-test.yml
+# Runs automated tests using Terratest
+
+name: Terraform Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Run Terratest
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        example:
+          - simple-web-app
+          - microservices-platform
+          - data-processing-pipeline
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.0
+          terraform_wrapper: false
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Download Go dependencies
+        run: |
+          cd test
+          go mod download
+          go mod tidy
+
+      - name: Run tests
+        run: |
+          cd test
+          go test -v -timeout 45m -parallel 1 ./...
+        env:
+          TF_VAR_db_password: "TestPassword123!"
+
+---
