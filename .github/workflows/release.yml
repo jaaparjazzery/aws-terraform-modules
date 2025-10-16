@@ -48,3 +48,5 @@ jobs:
             All modules in this release are version v${{ steps.version.outputs.version }}
           draft: false
           prerelease: false
+
+---
