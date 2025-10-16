@@ -4,7 +4,7 @@
 
 This document describes the architecture and design decisions for the AWS Terraform Modules collection.
 
-
+<img src="architectural_diagram.svg">
 
 ## Design Principles
 
