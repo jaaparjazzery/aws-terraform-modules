@@ -255,5 +255,3 @@ quick-check: ## Quick validation (fmt, validate)
 full-check: ## Full check (fmt, validate, lint, security)
 	@$(MAKE) test
 	@echo "$(GREEN)Full check passed!$(NC)"
-
----
