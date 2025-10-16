@@ -1,4 +1,3 @@
-# docs/ARCHITECTURE.md
 # Architecture Documentation
 
 ## Overview
