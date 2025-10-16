@@ -1,5 +1,3 @@
-## File: README.md
-
 # AWS VPC Terraform Module
 
 This module creates a complete AWS VPC with public and private subnets across multiple availability zones.
@@ -64,3 +62,4 @@ module "vpc" {
 | private_subnet_ids | IDs of private subnets |
 | nat_gateway_ids | IDs of NAT Gateways |
 | internet_gateway_id | ID of Internet Gateway |
+
