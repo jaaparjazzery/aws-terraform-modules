@@ -23,7 +23,7 @@ Terraform module for creating and managing Amazon Simple Notification Service (S
 
 ```hcl
 module "notifications" {
-  source = "./modules/sns-sqs"
+  source = "./modules/messaging"
 
   create_sns_topic = true
   sns_topic_name   = "app-notifications"
@@ -46,7 +46,7 @@ module "notifications" {
 
 ```hcl
 module "task_queue" {
-  source = "./modules/sns-sqs"
+  source = "./modules/messaging"
 
   create_sqs_queue = true
   sqs_queue_name   = "task-queue"
@@ -67,7 +67,7 @@ module "task_queue" {
 
 ```hcl
 module "reliable_queue" {
-  source = "./modules/sns-sqs"
+  source = "./modules/messaging"
 
   create_sqs_queue = true
   sqs_queue_name   = "order-processing"
@@ -92,7 +92,7 @@ module "reliable_queue" {
 
 ```hcl
 module "fifo_queue" {
-  source = "./modules/sns-sqs"
+  source = "./modules/messaging"
 
   create_sqs_queue = true
   sqs_queue_name   = "transactions.fifo"
@@ -123,7 +123,7 @@ module "fifo_queue" {
 
 ```hcl
 module "event_fanout" {
-  source = "./modules/sns-sqs"
+  source = "./modules/messaging"
 
   # SNS Topic
   create_sns_topic = true
@@ -178,7 +178,7 @@ module "event_fanout" {
 
 ```hcl
 module "secure_messaging" {
-  source = "./modules/sns-sqs"
+  source = "./modules/messaging"
 
   # SNS Topic with encryption
   create_sns_topic = true
@@ -204,7 +204,7 @@ module "secure_messaging" {
 
 ```hcl
 module "multi_subscription" {
-  source = "./modules/sns-sqs"
+  source = "./modules/messaging"
 
   create_sns_topic = true
   sns_topic_name   = "alerts"
@@ -259,7 +259,7 @@ module "multi_subscription" {
 
 ```hcl
 module "production_messaging" {
-  source = "./modules/sns-sqs"
+  source = "./modules/messaging"
 
   # SNS Topic Configuration
   create_sns_topic      = true
