@@ -1,6 +1,3 @@
-- [DevOps Subreddit](https://www.reddit.com/r/devops/)
-- [Infrastructure as Code Slack](https://invite.slack.golevelup.com/)
-
 **[Back to Resources](#additional-resources)** | **[Back to Top](#quick-navigation)**
 
 ---
@@ -3009,3 +3006,4 @@ For questions, feedback, or support, please [open an issue](https://github.com/j
 
 
 Happy Terraforming! 🚀
+
