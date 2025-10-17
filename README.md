@@ -119,7 +119,7 @@ This repository contains reusable Terraform modules for common AWS services. Eac
 Clone this repository:
 
 ```bash
-git clone https://github.com/yourusername/aws-terraform-modules.git
+git clone https://github.com/jaaparjazzery/aws-terraform-modules.git
 cd aws-terraform-modules
 ```
 
@@ -2659,7 +2659,7 @@ We welcome contributions! Please follow these guidelines:
 
 1. **Fork the Repository**
    ```bash
-   git clone https://github.com/yourusername/aws-terraform-modules.git
+   git clone https://github.com/jaaparjazzery/aws-terraform-modules.git
    cd aws-terraform-modules
    ```
 
@@ -2798,9 +2798,9 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 ### Getting Help
 
-- 📖 [Documentation](https://github.com/yourusername/aws-terraform-modules/wiki)
-- 🐛 [Issue Tracker](https://github.com/yourusername/aws-terraform-modules/issues)
-- 💬 [Discussions](https://github.com/yourusername/aws-terraform-modules/discussions)
+- 📖 [Documentation](https://github.com/jaaparjazzery/aws-terraform-modules/wiki)
+- 🐛 [Issue Tracker](https://github.com/jaaparjazzery/aws-terraform-modules/issues)
+- 💬 [Discussions](https://github.com/jaaparjazzery/aws-terraform-modules/discussions)
 - 📧 Email: support@example.com
 
 ### Reporting Issues
@@ -3003,10 +3003,9 @@ We will respond within 48 hours and work with you to address the issue.
 
 ---
 
-**Made with ❤️ by the community**
-
-For questions, feedback, or support, please [open an issue](https://github.com/yourusername/aws-terraform-modules/issues) or [start a discussion](https://github.com/yourusername/aws-terraform-modules/discussions).
+For questions, feedback, or support, please [open an issue](https://github.com/jaaparjazzery/aws-terraform-modules/issues) or [start a discussion](https://github.com/jaaparjazzery/aws-terraform-modules/discussions).
 
 **[Back to Top](#quick-navigation)**
+
 
 Happy Terraforming! 🚀
